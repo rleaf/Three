@@ -27,11 +27,26 @@ const textureLoader = new THREE.TextureLoader()
  */
 // Geometry
 const geometry = new THREE.PlaneGeometry(1, 1, 32, 32)
+const sphereGeometry = new THREE.SphereGeometry(1, 32, 16)
+
+const count = geometry.attributes.position.count
+const randoms = new Float32Array(count)
+
+for (let i = 0; i < count; i++) {
+    randoms[i] = Math.random()
+}
+
+geometry.setAttribute('aRandom', new THREE.BufferAttribute(randoms, 1))
 
 // Material
-const material = new THREE.RawShaderMaterial({
+const material = new THREE.ShaderMaterial({
     vertexShader: vertexShader,
-    fragmentShader: fragmentShader
+    fragmentShader: fragmentShader,
+    // wireframe: true
+    uniforms: {
+        uFrequency: { value: new THREE.Vector2(5, 5) },
+        uTime: { value: 0 }
+    }
 })
 
 // const material = new THREE.MeshBasicMaterial()
@@ -91,6 +106,8 @@ const clock = new THREE.Clock()
 const tick = () =>
 {
     const elapsedTime = clock.getElapsedTime()
+
+    material.uniforms.uTime.value = elapsedTime
 
     // Update controls
     controls.update()
