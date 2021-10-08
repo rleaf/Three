@@ -86,7 +86,7 @@ scene.add(pointLight, ambientLight)
  * Sizes
  */
 const sizes = {
-    width: window.innerWidth,
+    width: 800,
     height: window.innerHeight
 }
 
@@ -125,7 +125,7 @@ controls.enableDamping = true
 const renderer = new THREE.WebGLRenderer({
     canvas: canvas
 })
-renderer.setSize(sizes.width, sizes.height)
+renderer.setSize(width.sizes, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
 /**
