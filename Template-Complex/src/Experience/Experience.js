@@ -13,17 +13,24 @@ import assets from './assets.js'
 export default class Experience
 {
     static instance
-
+    
     constructor(_options = {})
     {
         if(Experience.instance)
         {
+            console.log('pancakes');
             return Experience.instance
+        } else {
+            console.log('frog');
         }
+        console.log('waffle', Experience.instance);
+        
         Experience.instance = this
 
+        
         // Options
         this.targetElement = _options.targetElement
+        console.log('waffle', this);
 
         if(!this.targetElement)
         {
@@ -46,6 +53,7 @@ export default class Experience
             this.resize()
         })
 
+        
         this.update()
     }
 
@@ -109,14 +117,15 @@ export default class Experience
 
         if(this.world)
             this.world.update()
-        
+
         if(this.renderer)
             this.renderer.update()
-
-        window.requestAnimationFrame(() =>
-        {
-            this.update()
-        })
+        
+            
+            window.requestAnimationFrame(() =>
+            {
+                this.update()
+            })
     }
 
     resize()
