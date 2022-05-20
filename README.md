@@ -1,5 +1,3 @@
-# Three
+# Three Lab
 
-**The Lab**
-
-General use for making shaders
+General use for messing with shaders
