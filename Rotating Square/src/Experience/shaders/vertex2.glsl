@@ -1,11 +1,37 @@
-//	Classic Perlin 3D Noise 
-//	by Stefan Gustavson
-//
-vec4 permute(vec4 x){return mod(((x*34.0)+1.0)*x, 289.0);}
-vec4 taylorInvSqrt(vec4 r){return 1.79284291400159 - 0.85373472095314 * r;}
-vec3 fade(vec3 t) {return t*t*t*(t*(t*6.0-15.0)+10.0);}
+// Add features to every fragment. Enables broadcasting of a scalar value to every fragment of a shader
+// which makes mutations more ammenable in the JS.
+#include <fog_pars_vertex>
+uniform float uElevation;
+uniform float uTime;
+uniform float uSpeed;
+uniform vec2 uFrequency;
 
-float perlin3d(vec3 P)
+// Add idiosyncrasies between the fragments of a shader
+attribute float aRandom;
+
+// Pass values from vertex shader to fragment shader
+varying float vRandom;
+varying float vFrequency;
+varying vec2 vUv;
+varying float vElevation;
+
+// Classic Perlin 3D Noise 
+// by Stefan Gustavson
+//
+vec4 permute(vec4 x)
+{
+    return mod(((x*34.0)+1.0)*x, 289.0);
+}
+vec4 taylorInvSqrt(vec4 r)
+{
+    return 1.79284291400159 - 0.85373472095314 * r;
+}
+vec3 fade(vec3 t)
+{
+    return t*t*t*(t*(t*6.0-15.0)+10.0);
+}
+
+float cnoise(vec3 P)
 {
     vec3 Pi0 = floor(P); // Integer part for indexing
     vec3 Pi1 = Pi0 + vec3(1.0); // Integer part + 1
@@ -74,4 +100,30 @@ float perlin3d(vec3 P)
     return 2.2 * n_xyz;
 }
 
-#pragma glslify: export(perlin3d)
+void main()
+{
+   #include <begin_vertex>
+   #include <project_vertex>
+   #include <fog_vertex>
+   vec4 modelPosition = modelMatrix * vec4(position , 1.0);
+
+   float elevation = sin(modelPosition.x * uFrequency.x +uTime * uSpeed) *
+   sin(modelPosition.z * uFrequency.y +uTime * uSpeed) * uElevation;
+   elevation += cnoise(vec3(modelPosition.xz * 3.0, uTime * 0.2)) * 0.15;
+   // for(float i = 1.0; i <= 3.0; i++)
+   // {
+   //    // elevation -= cnoise(vec3(modelPosition.xz * 3.0, uTime * 0.2)) * 0.05 / i;
+   // }
+   vElevation = elevation;
+
+   modelPosition.y += elevation;
+
+   vec4 viewPosition = viewMatrix * modelPosition;
+   vec4 projectedPosition = projectionMatrix * viewPosition;
+   vRandom = aRandom;
+   vUv = uv;
+
+   gl_Position = projectedPosition;
+   
+
+}

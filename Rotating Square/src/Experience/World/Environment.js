@@ -7,7 +7,7 @@ export default class Environment {
       this.experience = new Experience()
       this.scene = this.experience.scene
 
-      this.setSunLight()
+      // this.setSunLight()
       // this.setAmbientLight()
    }
 
