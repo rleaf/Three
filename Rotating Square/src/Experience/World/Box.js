@@ -17,7 +17,6 @@ export default class Box {
    }
 
    setMaterial() {
-      // this.material = new THREE.MeshBasicMaterial({ wireframe: true})
       this.material = new THREE.MeshStandardMaterial()
    }
 

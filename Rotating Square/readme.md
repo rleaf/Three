@@ -1,5 +1,7 @@
 # Three.js Template
 
+Part of porting over old experiences to new template
+
 ## Setup
 Download [Node.js](https://nodejs.org/en/download/).
 Run this followed commands:

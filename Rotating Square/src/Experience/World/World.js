@@ -13,19 +13,17 @@ export default class World {
       this.scene = this.experience.scene
       this.environment = new Environment()
       this.plane = new Plane()
-
       
       this.setCamera()
    }
 
    update() {
-      // this.box.mesh.rotation.y += 0.005
-      // console.log(this.experience.time);
+      this.plane.mesh.rotation.y += 0.005
    }
    
    setCamera() {
-      // this.camera.instance.lookAt(this.plane.mesh.position)
+      // The plane isn't centered to origin (for fun), so have the camera set to look
+      // at the plane
       this.camera.controls.target = this.plane.mesh.position
-      // console.log(this.plane.mesh.position);
    }
 }
