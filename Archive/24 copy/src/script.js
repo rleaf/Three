@@ -12,7 +12,7 @@ import fragmentShader from './shaders/fragment.glsl'
 const gui = new dat.GUI()
 
 // Canvas
-const canvas = document.querySelector('canvas.webgl')
+const canvas0 = document.querySelector('canvas.webgl')
 
 // Scene
 const scene = new THREE.Scene()
@@ -116,16 +116,16 @@ camera.position.set(0.25, 0.2, 1)
 scene.add(camera)
 
 // Controls
-const controls = new OrbitControls(camera, canvas)
+const controls = new OrbitControls(camera, canvas0)
 controls.enableDamping = true
 
 /**
  * Renderer
  */
 const renderer = new THREE.WebGLRenderer({
-    canvas: canvas
+    canvas: canvas0
 })
-renderer.setSize(width.sizes, sizes.height)
+renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
 /**
