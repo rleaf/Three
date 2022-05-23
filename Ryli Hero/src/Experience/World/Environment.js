@@ -7,15 +7,16 @@ export default class Environment {
       this.experience = new Experience()
       this.scene = this.experience.scene
 
-      this.setPointLight()
-      this.setAmbientLight()
+      // Shaders don't interact w/ light
+      // this.setPointLight()
+      // this.setAmbientLight()
+
       this.setFog()
    }
 
    setPointLight() {
       this.pointLight = new THREE.PointLight(0x3e8edf, 1)
       this.pointLight.position.set(50, 50, 0)
-
       this.scene.add(this.pointLight)
    }
 

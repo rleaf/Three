@@ -10,10 +10,15 @@ export default class Camera {
       this.sizes = this.experience.sizes
       this.scene = this.experience.scene
       this.canvas = this.experience.canvas
+      this.cursor = {
+         x: 0,
+         y: 0
+      }
 
       this.setInstance()
       this.setControls()
       this.setAnchor()
+      this.setWobble()
 
    }
 
@@ -39,7 +44,21 @@ export default class Camera {
       this.instance.updateProjectionMatrix()
    }
 
+   setWobble() {
+      window.addEventListener('mousemove', () => {
+         this.cursor.x = event.clientX / this.sizes.width - 0.5
+         this.cursor.y = event.clientY / this.sizes.height - 0.5
+      })
+   }
+
    update() {
+
+      const yAxis = new THREE.Vector3(0, 1, 0).normalize()
+
+      this.anchor.rotateOnWorldAxis(yAxis, 0.0008)
+      this.instance.rotation.y = -(this.cursor.x * 0.04)
+      this.instance.rotation.x = -(this.cursor.y * 0.04)
       this.controls.update()
+
    }
 }
