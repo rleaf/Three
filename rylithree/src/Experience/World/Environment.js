@@ -7,24 +7,25 @@ export default class Environment {
       this.experience = new Experience()
       this.scene = this.experience.scene
 
-      // this.setSunLight()
-      // this.setAmbientLight()
+      this.setPointLight()
+      this.setAmbientLight()
+      this.setFog()
    }
 
-   setSunLight() {
+   setPointLight() {
+      this.pointLight = new THREE.PointLight(0x3e8edf, 1)
+      this.pointLight.position.set(50, 50, 0)
 
-      this.sunLight = new THREE.DirectionalLight('#ffffff', 4)
-      this.sunLight.castShadow = true
-      this.sunLight.shadow.camera.far = 15
-      this.sunLight.shadow.mapSize.set(1024, 1024)
-      this.sunLight.shadow.normalBias = 0.05
-      this.sunLight.position.set(3, 3, - 2.25)
-      this.scene.add(this.sunLight)
+      this.scene.add(this.pointLight)
    }
 
    setAmbientLight() {
-      this.ambientLight = new THREE.AmbientLight(0xfff44, 0.5)
+      this.ambientLight = new THREE.AmbientLight(0xffffff, 0.25)
+      this.ambientLight.position.set(0, 5, 0)
       this.scene.add(this.ambientLight)
    }
    
+   setFog() {
+      this.scene.fog = new THREE.Fog('#0e0e0e', 1, 5)
+   }
 }

@@ -33,13 +33,13 @@ export default class Plane {
             uElevation: { value: 0.2 },
             uFrequency: { value: new THREE.Vector2(4, 1.5) },
             uSpeed: { value: 0.25},
-            uValleyColor: { value: new THREE.Color('rgb(131, 73, 77)')},
-            uPeakColor: { value: new THREE.Color('hsl(0, 0%, 0%)')},
+            uValleyColor: { value: new THREE.Color(0x1a1a1a)},
+            uPeakColor: { value: new THREE.Color(0x000000)},
             // uValleyColor: { value: new THREE.Color(uColors.uValleyColor.r, uColors.uValleyColor.g, uColors.uValleyColor.b)},
             // uPeakColor: { value: new THREE.Color(uColors.uPeakColor.r, uColors.uPeakColor.g, uColors.uPeakColor.b)},
             uColorOffset: { value: 0.11 },
             uColorMultiplier: { value: 5 },
-            // uTransparency: { value: groupOpacity.hero },
+            uTransparency: { value: 1.0 },
             ...THREE.UniformsLib['fog'],
             ...THREE.UniformsLib['lights'],
 
@@ -50,7 +50,7 @@ export default class Plane {
 
    setMesh() {
       this.mesh = new THREE.Mesh(this.geometry, this.material)
-      this.mesh.rotation.x = -Math.Pi * 0.5
+      this.mesh.rotation.x = -Math.PI * 0.5
       this.mesh.position.y = -0.5
       this.scene.add(this.mesh)
    }

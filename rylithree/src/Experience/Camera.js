@@ -13,6 +13,7 @@ export default class Camera {
 
       this.setInstance()
       this.setControls()
+      this.setAnchor()
 
    }
 
@@ -26,7 +27,11 @@ export default class Camera {
       this.controls = new OrbitControls(this.instance, this.canvas)
       this.controls.enableDamping = true
       this.controls.enabled = false
+   }
 
+   setAnchor() {
+      this.anchor = new THREE.Group()
+      this.anchor.add(this.instance)
    }
 
    resize() {
