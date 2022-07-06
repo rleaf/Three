@@ -6,7 +6,7 @@ uniform float uColorMultiplier;
 uniform float uTransparency;
 
 varying float vRandom;
-varying vec2 vUv;
+// varying vec2 vUv;
 varying float vElevation;
 
 

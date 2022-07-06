@@ -33,7 +33,7 @@ export default class Plane {
             uElevation: { value: 0.2 },
             uFrequency: { value: new THREE.Vector2(4, 1.5) },
             uSpeed: { value: 0.25},
-            uValleyColor: { value: new THREE.Color(0x1a1a1a)},
+            uValleyColor: { value: new THREE.Color(0x0e0e0e)},
             uPeakColor: { value: new THREE.Color(0x000000)},
             // uValleyColor: { value: new THREE.Color(uColors.uValleyColor.r, uColors.uValleyColor.g, uColors.uValleyColor.b)},
             // uPeakColor: { value: new THREE.Color(uColors.uPeakColor.r, uColors.uPeakColor.g, uColors.uPeakColor.b)},
